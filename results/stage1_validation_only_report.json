@@ -1,0 +1,114 @@
+{
+  "mode": "validate_only_300_train_rows",
+  "sheets_read": [
+    "Stage1_Train"
+  ],
+  "stage1_test_touched": false,
+  "selected_model_name": "Hybrid-Quantum-FeatureAug-LogReg",
+  "selection_rationale": "Predeclared composite criterion S_train = 0.35*AP_PR_AUC + 0.25*ROC_AUC + 0.20*MeanFold_Prec@10 - 0.10*Brier - 0.10*ECE_5bin evaluated strictly on 5-fold StratifiedKFold out-of-fold predictions on the 300 Stage1_Train rows selected 'Hybrid-Quantum-FeatureAug-LogReg', which passed predeclared calibration qualification (Brier <= 0.10306 and 5-bin ECE <= 0.080) (S_train = 0.2845, ROC-AUC = 0.6750, PR-AUC [AP] = 0.2265, Brier = 0.1001, ECE = 0.0152). Official downstream routing uses this frozen hybrid quantum pipeline, while all classical model comparisons remain strictly on Stage1_Train OOF.",
+  "selection_optimism_note": "Because the 5-fold Stage1_Train OOF metrics were used during architecture/encoding refinement and in the 25-configuration two-seed (42, 1042) study, the reported OOF metrics of the selected model are selection-conditioned and carry finite-sample selection optimism rather than guaranteeing an out-of-sample generalization gain. Note on scoring rules: LogLoss and Brier are proper scoring rules, whereas S_train / S_v3 is a heuristic composite ranking-and-calibration summary. Under the preregistered rule (improve 2-seed mean AP, ROC-AUC, Brier, LogLoss, and S_v3 simultaneously AND win >=7/10 paired outer folds on S_v3 and LogLoss), C02_Bandwidth_030_Reps2 (reps=2, w_q=0.35, C=0.12, n_kpca=6, angle_scale=0.30) is the sole qualifying challenger (2-seed mean AP=0.1988 vs 0.1869, ROC-AUC=0.6322 vs 0.6241, Brier=0.10267 vs 0.10326, LogLoss=0.35555 vs 0.35762, S_v3=0.2555 vs 0.2485; winning 7/10 paired folds on S_v3, LogLoss, and Brier).",
+  "cv_metrics_by_model": {
+    "Hybrid-Quantum-FeatureAug-LogReg": {
+      "composite_train_score": 0.2845074077338846,
+      "qualifies": true,
+      "pooled_oof": {
+        "roc_auc": 0.6750404312668463,
+        "pr_auc_average_precision": 0.22650525672195054,
+        "pr_auc_trapezoidal": 0.21225199040875914,
+        "brier_score": 0.10006488328324727,
+        "log_loss": 0.3429301115591839,
+        "ece_5bin": 0.015230516071848955,
+        "precision_at_10_pooled_n300": 0.4,
+        "recall_at_10_pooled_n300": 0.11428571428571428,
+        "mean_predicted_prob": 0.12113343463295216,
+        "empirical_positive_rate": 0.11666666666666667
+      },
+      "per_fold_n60_pos7": {
+        "fold_size": 60,
+        "positives_per_fold": 7,
+        "roc_auc_mean": 0.6797843665768194,
+        "roc_auc_std": 0.07243405609668574,
+        "pr_auc_ap_mean": 0.30874880876931543,
+        "pr_auc_ap_std": 0.06956629669565643,
+        "pr_auc_trapz_mean": 0.2716117181228008,
+        "brier_mean": 0.10006488328324728,
+        "log_loss_mean": 0.34293011155918385,
+        "precision_at_10_mean": 0.24,
+        "precision_at_10_std": 0.04898979485566355,
+        "recall_at_10_mean": 0.3428571428571428,
+        "recall_at_10_std": 0.06998542122237651,
+        "fold_composite_scores": [
+          0.3593198474496403,
+          0.3033415173527971,
+          0.24229097774663083,
+          0.33785111469088236,
+          0.32466178407688456
+        ]
+      }
+    },
+    "Classical-LogisticRegression-L2": {
+      "composite_train_score": 0.2432429507180301,
+      "qualifies": true,
+      "pooled_oof": {
+        "roc_auc": 0.6247978436657682,
+        "pr_auc_average_precision": 0.19986939895050576,
+        "pr_auc_trapezoidal": 0.18381740353339054,
+        "brier_score": 0.10194496931597398,
+        "log_loss": 0.3536998880005625,
+        "ece_5bin": 0.007163028994915284,
+        "precision_at_10_pooled_n300": 0.3,
+        "recall_at_10_pooled_n300": 0.08571428571428572,
+        "mean_predicted_prob": 0.11837357288601535,
+        "empirical_positive_rate": 0.11666666666666667
+      },
+      "per_fold_n60_pos7": {
+        "fold_size": 60,
+        "positives_per_fold": 7,
+        "roc_auc_mean": 0.6269541778975741,
+        "roc_auc_std": 0.0967290773794367,
+        "pr_auc_ap_mean": 0.2653174338172873,
+        "pr_auc_ap_std": 0.07892459764658015,
+        "pr_auc_trapz_mean": 0.23843617445901347,
+        "brier_mean": 0.101944969315974,
+        "log_loss_mean": 0.3536998880005625,
+        "precision_at_10_mean": 0.13999999999999999,
+        "precision_at_10_std": 0.07999999999999999,
+        "recall_at_10_mean": 0.19999999999999996,
+        "recall_at_10_std": 0.11428571428571428,
+        "fold_composite_scores": [
+          0.36176528121216944,
+          0.21270398378064387,
+          0.20894042239657853,
+          0.23799718479880677,
+          0.30185628915468843
+        ]
+      }
+    }
+  },
+  "environment": {
+    "python_executable": "/Users/nafeeskhan/Desktop/atomic hack/.venv/bin/python",
+    "python_version": "3.13.13",
+    "cwd": "/Users/nafeeskhan/Desktop/atomic hack/Submission",
+    "platform": "macOS-26.3-arm64-arm-64bit-Mach-O",
+    "pid": 30797,
+    "package_versions": {
+      "numpy": "2.5.4",
+      "scipy": "1.18.1",
+      "pandas": "3.1.1",
+      "openpyxl": "3.1.5",
+      "scikit-learn": "1.9.1",
+      "qiskit": "2.6.2",
+      "qiskit-aer": "0.18.2",
+      "matplotlib": "3.11.2",
+      "pytest": "9.2.0"
+    },
+    "seeds": {
+      "workbook_sampling_seed": 42,
+      "workbook_train_test_split_seed": 42,
+      "stage1_cv_and_model_seed": 42,
+      "stage2_qaoa_optimizer_and_simulator_seed": 42,
+      "stage3_simulator_and_mc_seed": 42
+    }
+  },
+  "runtime_sec": 1.0352502909954637
+}
